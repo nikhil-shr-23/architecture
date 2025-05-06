@@ -1,21 +1,22 @@
 'use client'
 
 import { useState, useRef } from 'react'
-import { useRouter } from 'next/navigation'
+// import { useRouter } from 'next/navigation'
 import { createClient } from '@/utils/supabase/client'
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
 import { toast } from 'sonner'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import Image from 'next/image'
 import { Card, CardContent } from '@/components/ui/card'
 
-export default function PostForm({ user, profile }: { user: any, profile: any }) {
+export default function PostForm({ user, profile }: { user: Record<string, unknown>, profile: Record<string, unknown> }) {
   const [content, setContent] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [imageFile, setImageFile] = useState<File | null>(null)
   const [imagePreview, setImagePreview] = useState<string | null>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
-  const router = useRouter()
+  // const router = useRouter()
   const supabase = createClient()
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -71,7 +72,7 @@ export default function PostForm({ user, profile }: { user: any, profile: any })
         const fileName = `${user.id}-${Date.now()}.${fileExt}`
         const filePath = `post-images/${fileName}`
 
-        const { error: uploadError, data } = await supabase.storage
+        const { error: uploadError } = await supabase.storage
           .from('posts')
           .upload(filePath, imageFile)
 
@@ -94,22 +95,20 @@ export default function PostForm({ user, profile }: { user: any, profile: any })
         image_url: imageUrl,
       });
 
-      const { data: newPost, error } = await supabase
+      const { error } = await supabase
         .from('posts')
         .insert({
           user_id: user.id,
           content: content.trim(),
           image_url: imageUrl,
         })
-        .select()
-        .single();
 
       if (error) {
         console.error('Error creating post:', error);
         throw error;
       }
 
-      console.log('Post created successfully:', newPost);
+      console.log('Post created successfully');
 
       toast.success('Post created successfully!')
       setContent('')
@@ -121,7 +120,7 @@ export default function PostForm({ user, profile }: { user: any, profile: any })
 
       // Force a hard refresh to ensure the new post is fetched from the server
       window.location.reload()
-    } catch (error: any) {
+    } catch (error) {
       console.error('Error creating post:', error)
       toast.error(error.message || 'Failed to create post')
     } finally {
@@ -151,9 +150,11 @@ export default function PostForm({ user, profile }: { user: any, profile: any })
 
               {imagePreview && (
                 <div className="relative mb-3">
-                  <img
+                  <Image
                     src={imagePreview}
                     alt="Preview"
+                    width={400}
+                    height={300}
                     className="max-h-60 rounded-md object-contain"
                   />
                   <button

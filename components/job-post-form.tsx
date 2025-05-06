@@ -75,7 +75,7 @@ export default function JobPostForm() {
 
     try {
       const { data: userData, error: userError } = await supabase.auth.getUser()
-      
+
       if (userError) {
         throw userError
       }
@@ -96,7 +96,7 @@ export default function JobPostForm() {
       setIsOpen(false)
       form.reset()
       router.refresh()
-    } catch (error: any) {
+    } catch (error) {
       console.error('Error posting job:', error)
       toast.error(error.message || 'Failed to post job')
     } finally {
@@ -116,7 +116,7 @@ export default function JobPostForm() {
             Fill out the form below to post a new job opportunity for architects.
           </DialogDescription>
         </DialogHeader>
-        
+
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 py-4">
             <FormField
@@ -132,7 +132,7 @@ export default function JobPostForm() {
                 </FormItem>
               )}
             />
-            
+
             <FormField
               control={form.control}
               name="company_name"
@@ -146,7 +146,7 @@ export default function JobPostForm() {
                 </FormItem>
               )}
             />
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <FormField
                 control={form.control}
@@ -161,15 +161,15 @@ export default function JobPostForm() {
                   </FormItem>
                 )}
               />
-              
+
               <FormField
                 control={form.control}
                 name="job_type"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Job Type</FormLabel>
-                    <Select 
-                      onValueChange={field.onChange} 
+                    <Select
+                      onValueChange={field.onChange}
                       defaultValue={field.value}
                     >
                       <FormControl>
@@ -190,7 +190,7 @@ export default function JobPostForm() {
                 )}
               />
             </div>
-            
+
             <FormField
               control={form.control}
               name="salary_range"
@@ -207,7 +207,7 @@ export default function JobPostForm() {
                 </FormItem>
               )}
             />
-            
+
             <FormField
               control={form.control}
               name="description"
@@ -215,17 +215,17 @@ export default function JobPostForm() {
                 <FormItem>
                   <FormLabel>Job Description</FormLabel>
                   <FormControl>
-                    <Textarea 
-                      placeholder="Describe the job responsibilities and what the role entails..." 
+                    <Textarea
+                      placeholder="Describe the job responsibilities and what the role entails..."
                       className="min-h-[120px]"
-                      {...field} 
+                      {...field}
                     />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            
+
             <FormField
               control={form.control}
               name="requirements"
@@ -233,17 +233,17 @@ export default function JobPostForm() {
                 <FormItem>
                   <FormLabel>Requirements</FormLabel>
                   <FormControl>
-                    <Textarea 
-                      placeholder="List the skills, qualifications, and experience required..." 
+                    <Textarea
+                      placeholder="List the skills, qualifications, and experience required..."
                       className="min-h-[120px]"
-                      {...field} 
+                      {...field}
                     />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            
+
             <FormField
               control={form.control}
               name="contact_email"
@@ -257,7 +257,7 @@ export default function JobPostForm() {
                 </FormItem>
               )}
             />
-            
+
             <FormField
               control={form.control}
               name="application_url"
@@ -274,16 +274,16 @@ export default function JobPostForm() {
                 </FormItem>
               )}
             />
-            
+
             <div className="flex justify-end space-x-4 pt-4">
-              <Button 
-                type="button" 
-                variant="outline" 
+              <Button
+                type="button"
+                variant="outline"
                 onClick={() => setIsOpen(false)}
               >
                 Cancel
               </Button>
-              <Button 
+              <Button
                 type="submit"
                 disabled={isSubmitting}
               >

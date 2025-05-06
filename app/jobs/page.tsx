@@ -1,7 +1,7 @@
 import { createClient } from '@/utils/supabase/server'
 import { redirect } from 'next/navigation'
 import { cookies } from 'next/headers'
-import Link from 'next/link'
+// import Link from 'next/link'
 import DashboardLayout from '@/components/dashboard-layout'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
@@ -48,7 +48,7 @@ export default async function JobsPage() {
       job_type: 'full-time',
       salary_range: '$90,000 - $120,000',
       description: 'We are seeking a Senior Architect to join our award-winning team in London. The ideal candidate will have experience in designing sustainable commercial buildings and leading project teams.',
-      requirements: 'Master\'s degree in Architecture, 7+ years of experience, LEED certification, proficiency in Revit and AutoCAD.',
+      requirements: "Master's degree in Architecture, 7+ years of experience, LEED certification, proficiency in Revit and AutoCAD.",
       contact_email: 'careers@fosterandpartners.com',
       application_url: 'https://fosterandpartners.com/careers',
       created_at: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(), // 3 days ago
@@ -65,7 +65,7 @@ export default async function JobsPage() {
       job_type: 'full-time',
       salary_range: '$75,000 - $95,000',
       description: 'Zaha Hadid Architects is looking for a talented Project Architect to join our New York office. You will be responsible for developing design concepts and working with clients to deliver exceptional architectural solutions.',
-      requirements: 'Bachelor\'s or Master\'s degree in Architecture, 5+ years of experience, strong design portfolio, experience with parametric design tools.',
+      requirements: "Bachelor's or Master's degree in Architecture, 5+ years of experience, strong design portfolio, experience with parametric design tools.",
       contact_email: 'jobs@zaha-hadid.com',
       application_url: 'https://www.zaha-hadid.com/careers',
       created_at: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(), // 5 days ago
@@ -82,7 +82,7 @@ export default async function JobsPage() {
       job_type: 'full-time',
       salary_range: '€45,000 - €60,000',
       description: 'BIG is seeking a Junior Architect to join our Copenhagen office. This is an opportunity to work on innovative and sustainable projects across various scales and typologies.',
-      requirements: 'Bachelor\'s degree in Architecture, 1-3 years of experience, proficiency in Rhino, Grasshopper, and Adobe Creative Suite, strong visualization skills.',
+      requirements: "Bachelor's degree in Architecture, 1-3 years of experience, proficiency in Rhino, Grasshopper, and Adobe Creative Suite, strong visualization skills.",
       contact_email: 'jobs@big.dk',
       application_url: 'https://big.dk/careers',
       created_at: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(), // 7 days ago
@@ -181,17 +181,17 @@ export default async function JobsPage() {
                         <span className="font-medium">Salary Range:</span> {job.salary_range}
                       </div>
                     )}
-                    
+
                     <div className="mb-4">
                       <h3 className="font-semibold mb-2">Job Description</h3>
                       <p className="text-gray-700 whitespace-pre-line">{job.description}</p>
                     </div>
-                    
+
                     <div className="mb-4">
                       <h3 className="font-semibold mb-2">Requirements</h3>
                       <p className="text-gray-700 whitespace-pre-line">{job.requirements}</p>
                     </div>
-                    
+
                     <div className="text-sm text-gray-500 mt-4">
                       Posted {formatDistanceToNow(new Date(job.created_at), { addSuffix: true })}
                     </div>
@@ -203,7 +203,7 @@ export default async function JobsPage() {
                         {job.contact_email}
                       </a>
                     </div>
-                    
+
                     {job.application_url && (
                       <Button asChild>
                         <a href={job.application_url} target="_blank" rel="noopener noreferrer">
@@ -241,12 +241,12 @@ export default async function JobsPage() {
                           <span className="font-medium">Salary Range:</span> {job.salary_range}
                         </div>
                       )}
-                      
+
                       <div className="mb-4">
                         <h3 className="font-semibold mb-2">Job Description</h3>
                         <p className="text-gray-700 whitespace-pre-line">{job.description}</p>
                       </div>
-                      
+
                       <div className="text-sm text-gray-500 mt-4">
                         Posted {formatDistanceToNow(new Date(job.created_at), { addSuffix: true })}
                       </div>
@@ -258,7 +258,7 @@ export default async function JobsPage() {
                           {job.status}
                         </Badge>
                       </div>
-                      
+
                       <Button variant="outline">
                         Edit Job
                       </Button>
@@ -269,8 +269,8 @@ export default async function JobsPage() {
             ) : (
               <Card className="text-center p-6">
                 <CardContent className="pt-6">
-                  <p className="text-gray-500 mb-4">You haven't posted any jobs yet.</p>
-                  <p className="text-gray-500">Click the "Post a Job" button in the navigation bar to create your first job listing.</p>
+                  <p className="text-gray-500 mb-4">You haven&apos;t posted any jobs yet.</p>
+                  <p className="text-gray-500">Click the &quot;Post a Job&quot; button in the navigation bar to create your first job listing.</p>
                 </CardContent>
               </Card>
             )}

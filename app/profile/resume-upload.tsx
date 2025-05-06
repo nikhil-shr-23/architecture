@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/utils/supabase/client'
 import { Button } from '@/components/ui/button'
@@ -16,7 +16,7 @@ export default function ResumeUpload() {
   const supabase = createClient()
 
   // Fetch existing resume on component mount
-  useState(() => {
+  useEffect(() => {
     const fetchResume = async () => {
       const { data: { user } } = await supabase.auth.getUser()
       if (!user) return
@@ -33,7 +33,7 @@ export default function ResumeUpload() {
     }
 
     fetchResume()
-  }, [])
+  }, [supabase])
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {

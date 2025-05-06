@@ -7,12 +7,12 @@ import { toast } from 'sonner'
 
 type ConnectionStatus = 'none' | 'pending' | 'accepted' | 'rejected' | 'loading'
 
-export default function ConnectButton({ 
-  profileId, 
+export default function ConnectButton({
+  profileId,
   currentUserId,
   onConnectionChange
-}: { 
-  profileId: string, 
+}: {
+  profileId: string,
   currentUserId: string,
   onConnectionChange?: (status: ConnectionStatus) => void
 }) {
@@ -25,7 +25,7 @@ export default function ConnectButton({
     const checkConnection = async () => {
       try {
         // Check if current user sent a request to profile
-        const { data: sentRequest, error: sentError } = await supabase
+        const { data: sentRequest } = await supabase
           .from('connections')
           .select('*')
           .eq('user_id', currentUserId)
@@ -38,7 +38,7 @@ export default function ConnectButton({
         }
 
         // Check if profile sent a request to current user
-        const { data: receivedRequest, error: receivedError } = await supabase
+        const { data: receivedRequest } = await supabase
           .from('connections')
           .select('*')
           .eq('user_id', profileId)
@@ -83,9 +83,9 @@ export default function ConnectButton({
       setConnectionStatus('pending')
       toast.success('Connection request sent')
       if (onConnectionChange) onConnectionChange('pending')
-    } catch (error: any) {
+    } catch (error) {
       console.error('Error sending connection request:', error)
-      toast.error(error.message || 'Failed to send connection request')
+      toast.error(error instanceof Error ? error.message : 'Failed to send connection request')
     } finally {
       setIsLoading(false)
     }
@@ -107,9 +107,9 @@ export default function ConnectButton({
       setConnectionStatus('accepted')
       toast.success('Connection request accepted')
       if (onConnectionChange) onConnectionChange('accepted')
-    } catch (error: any) {
+    } catch (error) {
       console.error('Error accepting connection request:', error)
-      toast.error(error.message || 'Failed to accept connection request')
+      toast.error(error instanceof Error ? error.message : 'Failed to accept connection request')
     } finally {
       setIsLoading(false)
     }
@@ -131,9 +131,9 @@ export default function ConnectButton({
       setConnectionStatus('rejected')
       toast.success('Connection request rejected')
       if (onConnectionChange) onConnectionChange('rejected')
-    } catch (error: any) {
+    } catch (error) {
       console.error('Error rejecting connection request:', error)
-      toast.error(error.message || 'Failed to reject connection request')
+      toast.error(error instanceof Error ? error.message : 'Failed to reject connection request')
     } finally {
       setIsLoading(false)
     }
@@ -145,7 +145,7 @@ export default function ConnectButton({
 
     try {
       // Try to delete where current user is the requester
-      let { error } = await supabase
+      const { error } = await supabase
         .from('connections')
         .delete()
         .eq('user_id', currentUserId)
@@ -165,9 +165,9 @@ export default function ConnectButton({
       setConnectionStatus('none')
       toast.success('Connection removed')
       if (onConnectionChange) onConnectionChange('none')
-    } catch (error: any) {
+    } catch (error) {
       console.error('Error removing connection:', error)
-      toast.error(error.message || 'Failed to remove connection')
+      toast.error(error instanceof Error ? error.message : 'Failed to remove connection')
     } finally {
       setIsLoading(false)
     }

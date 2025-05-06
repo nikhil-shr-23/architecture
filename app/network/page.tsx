@@ -106,11 +106,11 @@ export default async function NetworkPage() {
                             <Avatar className="h-12 w-12">
                               <AvatarImage src={connection.profile.avatar_url || undefined} alt={connection.profile.full_name} />
                               <AvatarFallback>
-                                {connection.profile.full_name?.split(' ').map(n => n[0]).join('').toUpperCase()}
+                                {connection.profile.full_name?.split(' ').map((n: string) => n[0]).join('').toUpperCase()}
                               </AvatarFallback>
                             </Avatar>
                             <div className="flex-1 min-w-0">
-                              <Link 
+                              <Link
                                 href={`/profile?id=${connection.profile.id}`}
                                 className="text-lg font-medium text-gray-900 hover:underline"
                               >
@@ -120,8 +120,8 @@ export default async function NetworkPage() {
                                 {connection.profile.title || 'Architect'}
                               </p>
                             </div>
-                            <Button 
-                              variant="outline" 
+                            <Button
+                              variant="outline"
                               size="sm"
                               asChild
                             >
@@ -136,7 +136,7 @@ export default async function NetworkPage() {
                   </div>
                 ) : (
                   <div className="text-center py-8">
-                    <p className="text-gray-500 mb-4">You don't have any connections yet.</p>
+                    <p className="text-gray-500 mb-4">You don&apos;t have any connections yet.</p>
                     <p className="text-gray-500">Connect with other architects to grow your network!</p>
                   </div>
                 )}
@@ -159,11 +159,11 @@ export default async function NetworkPage() {
                             <Avatar className="h-12 w-12">
                               <AvatarImage src={request.requester.avatar_url || undefined} alt={request.requester.full_name} />
                               <AvatarFallback>
-                                {request.requester.full_name?.split(' ').map(n => n[0]).join('').toUpperCase()}
+                                {request.requester.full_name?.split(' ').map((n: string) => n[0]).join('').toUpperCase()}
                               </AvatarFallback>
                             </Avatar>
                             <div className="flex-1 min-w-0">
-                              <Link 
+                              <Link
                                 href={`/profile?id=${request.requester.id}`}
                                 className="text-lg font-medium text-gray-900 hover:underline"
                               >
@@ -174,7 +174,7 @@ export default async function NetworkPage() {
                               </p>
                             </div>
                             <div className="flex space-x-2">
-                              <Button 
+                              <Button
                                 size="sm"
                                 asChild
                               >
@@ -190,7 +190,7 @@ export default async function NetworkPage() {
                   </div>
                 ) : (
                   <div className="text-center py-8">
-                    <p className="text-gray-500">You don't have any pending connection requests.</p>
+                    <p className="text-gray-500">You don&apos;t have any pending connection requests.</p>
                   </div>
                 )}
               </CardContent>
@@ -212,11 +212,11 @@ export default async function NetworkPage() {
                             <Avatar className="h-12 w-12">
                               <AvatarImage src={architect.avatar_url || undefined} alt={architect.full_name} />
                               <AvatarFallback>
-                                {architect.full_name?.split(' ').map(n => n[0]).join('').toUpperCase()}
+                                {architect.full_name?.split(' ').map((n: string) => n[0]).join('').toUpperCase()}
                               </AvatarFallback>
                             </Avatar>
                             <div className="flex-1 min-w-0">
-                              <Link 
+                              <Link
                                 href={`/profile?id=${architect.id}`}
                                 className="text-lg font-medium text-gray-900 hover:underline"
                               >
@@ -226,8 +226,8 @@ export default async function NetworkPage() {
                                 {architect.title || 'Architect'}
                               </p>
                             </div>
-                            <Button 
-                              variant="outline" 
+                            <Button
+                              variant="outline"
                               size="sm"
                               asChild
                             >

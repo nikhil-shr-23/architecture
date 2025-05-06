@@ -40,7 +40,7 @@ export default async function RecruitersPage() {
       <Toaster />
       <div className="p-6">
         <h1 className="text-3xl font-bold mb-6">Recruiter View</h1>
-        
+
         <div className="mb-6">
           <div className="relative">
             <svg
@@ -64,7 +64,7 @@ export default async function RecruitersPage() {
             />
           </div>
         </div>
-        
+
         <div className="grid grid-cols-1 gap-6">
           <Card>
             <CardHeader>
@@ -83,11 +83,11 @@ export default async function RecruitersPage() {
                           <Avatar className="h-12 w-12">
                             <AvatarImage src={architect.avatar_url || undefined} alt={architect.full_name} />
                             <AvatarFallback>
-                              {architect.full_name?.split(' ').map(n => n[0]).join('').toUpperCase()}
+                              {architect.full_name?.split(' ').map((n: string) => n[0]).join('').toUpperCase()}
                             </AvatarFallback>
                           </Avatar>
                           <div className="flex-1 min-w-0">
-                            <Link 
+                            <Link
                               href={`/profile?id=${architect.id}`}
                               className="text-lg font-medium text-gray-900 hover:underline"
                             >
@@ -104,8 +104,8 @@ export default async function RecruitersPage() {
                             )}
                           </div>
                           <div className="flex space-x-2">
-                            <Button 
-                              variant="outline" 
+                            <Button
+                              variant="outline"
                               size="sm"
                               asChild
                             >
@@ -114,7 +114,7 @@ export default async function RecruitersPage() {
                               </Link>
                             </Button>
                             {architect.resume_url && (
-                              <Button 
+                              <Button
                                 size="sm"
                                 asChild
                               >
@@ -136,7 +136,7 @@ export default async function RecruitersPage() {
               )}
             </CardContent>
           </Card>
-          
+
           <Card>
             <CardHeader>
               <CardTitle>All Architects</CardTitle>
@@ -154,11 +154,11 @@ export default async function RecruitersPage() {
                           <Avatar className="h-12 w-12">
                             <AvatarImage src={architect.avatar_url || undefined} alt={architect.full_name} />
                             <AvatarFallback>
-                              {architect.full_name?.split(' ').map(n => n[0]).join('').toUpperCase()}
+                              {architect.full_name?.split(' ').map((n: string) => n[0]).join('').toUpperCase()}
                             </AvatarFallback>
                           </Avatar>
                           <div className="flex-1 min-w-0">
-                            <Link 
+                            <Link
                               href={`/profile?id=${architect.id}`}
                               className="text-lg font-medium text-gray-900 hover:underline"
                             >
@@ -174,8 +174,8 @@ export default async function RecruitersPage() {
                               </Badge>
                             )}
                           </div>
-                          <Button 
-                            variant="outline" 
+                          <Button
+                            variant="outline"
                             size="sm"
                             asChild
                           >

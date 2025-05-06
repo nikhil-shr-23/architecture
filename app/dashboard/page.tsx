@@ -50,12 +50,12 @@ export default async function DashboardPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="col-span-2 space-y-6">
             {/* Post creation form */}
-            <PostForm user={session.user} profile={profile} />
+            <PostForm user={session.user as unknown as Record<string, unknown>} profile={profile} />
 
             {/* Post feed */}
             <div className="bg-white rounded-lg shadow p-6">
               <h2 className="text-xl font-semibold mb-4">Feed</h2>
-              <PostFeed initialPosts={posts || []} currentUser={session.user} />
+              <PostFeed initialPosts={posts || []} currentUser={session.user as unknown as { id: string }} />
             </div>
           </div>
 
@@ -119,11 +119,11 @@ export default async function DashboardPage() {
                   {/* Client component for resume upload */}
                   <div className="mt-4 pt-4 border-t border-gray-200">
                     <h3 className="text-sm font-medium mb-2">Upload a new version:</h3>
-                    <DashboardResumeUpload userId={session.user.id} />
+                    <DashboardResumeUpload userId={session.user.id as string} />
                   </div>
                 </div>
               ) : (
-                <DashboardResumeUpload userId={session.user.id} />
+                <DashboardResumeUpload userId={session.user.id as string} />
               )}
             </div>
           </div>

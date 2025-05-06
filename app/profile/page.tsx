@@ -12,8 +12,9 @@ import AvatarUpload from '@/components/avatar-upload'
 import ProfileImage from '@/components/profile-image'
 import { Toaster } from '@/components/ui/sonner'
 
-type ProfilePageProps = {
-  searchParams: { id?: string }
+interface ProfilePageProps {
+  params: Promise<Record<string, string>>
+  searchParams: Promise<{ id?: string }>
 }
 
 export default async function ProfilePage({ searchParams }: ProfilePageProps) {
@@ -26,7 +27,8 @@ export default async function ProfilePage({ searchParams }: ProfilePageProps) {
   }
 
   // Determine which profile to show - current user or requested profile
-  const profileId = searchParams.id || session.user.id
+  const searchParamsData = await searchParams
+  const profileId = searchParamsData.id || session.user.id
   const isOwnProfile = profileId === session.user.id
 
   // Fetch user profile

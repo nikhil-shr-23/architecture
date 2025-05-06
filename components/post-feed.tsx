@@ -1,11 +1,12 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
+// import { useRouter } from 'next/navigation'
 import { createClient } from '@/utils/supabase/client'
 import { formatDistanceToNow } from 'date-fns'
 import { toast } from 'sonner'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardFooter } from '@/components/ui/card'
 import { Textarea } from '@/components/ui/textarea'
@@ -51,7 +52,7 @@ export default function PostFeed({
   const [showComments, setShowComments] = useState<{[key: string]: boolean}>({})
   const [isSubmitting, setIsSubmitting] = useState<{[key: string]: boolean}>({})
   const [isRefreshing, setIsRefreshing] = useState(false)
-  const router = useRouter()
+  // const router = useRouter()
   const supabase = createClient()
 
   // Function to refresh posts
@@ -131,7 +132,7 @@ export default function PostFeed({
           return post
         }))
       }
-    } catch (error: any) {
+    } catch (error) {
       console.error('Error toggling like:', error)
       toast.error(error.message || 'Failed to update like')
     }
@@ -186,7 +187,7 @@ export default function PostFeed({
         ...prev,
         [postId]: ''
       }))
-    } catch (error: any) {
+    } catch (error) {
       console.error('Error adding comment:', error)
       toast.error(error.message || 'Failed to add comment')
     } finally {
@@ -261,9 +262,11 @@ export default function PostFeed({
 
             {post.image_url && (
               <div className="mb-4">
-                <img
+                <Image
                   src={post.image_url}
                   alt="Post image"
+                  width={800}
+                  height={600}
                   className="rounded-md max-h-96 w-full object-contain bg-gray-100"
                 />
               </div>

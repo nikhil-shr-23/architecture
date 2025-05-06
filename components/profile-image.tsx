@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+// No useState needed
 import Image from 'next/image'
 
 interface ProfileImageProps {

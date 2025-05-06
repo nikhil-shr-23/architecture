@@ -102,9 +102,9 @@ export default function AvatarUpload({ userId, currentAvatarUrl }: { userId: str
 
       // Force refresh to show the new avatar
       router.refresh()
-    } catch (error: any) {
+    } catch (error) {
       console.error('Error uploading avatar:', error)
-      toast.error(error.message || 'Failed to upload profile picture')
+      toast.error(error instanceof Error ? error.message : 'Failed to upload profile picture')
     } finally {
       setIsUploading(false)
     }
@@ -146,9 +146,9 @@ export default function AvatarUpload({ userId, currentAvatarUrl }: { userId: str
       setAvatarPreview(null)
       toast.success('Profile picture removed')
       router.refresh()
-    } catch (error: any) {
+    } catch (error) {
       console.error('Error removing avatar:', error)
-      toast.error(error.message || 'Failed to remove profile picture')
+      toast.error(error instanceof Error ? error.message : 'Failed to remove profile picture')
     } finally {
       setIsUploading(false)
     }

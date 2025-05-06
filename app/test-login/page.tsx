@@ -11,7 +11,7 @@ export default function TestLoginPage() {
   const [message, setMessage] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
-  const [userData, setUserData] = useState<any>(null)
+  const [userData, setUserData] = useState<Record<string, unknown> | null>(null)
 
   const router = useRouter()
   const supabase = createClient()
